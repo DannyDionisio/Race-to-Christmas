@@ -2,33 +2,31 @@ class Controls {
     constructor(game) {
         this.game = game;
     }
+
     setControls() {
         window.addEventListener('keydown', event => {
             switch (event.keyCode) {
-                //left
+                //up
+                case 38:
+                    this.game.player.vy = -5;
+                    break;
+                //down
+                case 40:
+                    this.game.player.vy = 5;
+                    break;
             }
+        });
         window.addEventListener('keyup', event => {
             switch (event.keyCode) {
-
+                //up
+                case 38:
+                    this.game.player.vy = 0;
+                    break;
+                //down
+                case 40:
+                    this.game.player.vy = 0;
+                    break;
             }
-        })
         })
     }
 }
-
-
-
-
-
-
-//  setControls () {
-//      window.addEventListener('keydown', event => {
-//        switch (event.keyCode) {
-//            //LEFT
-//          case 37:
-//               this.game.player.vx=-5
-//          break;
-//            //RIGHT
-//          case 39:
-//               this.game.player.vx=5
-//          break;
