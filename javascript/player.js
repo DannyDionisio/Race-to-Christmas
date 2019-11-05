@@ -26,6 +26,5 @@ class Player {
   //    return;
   //  }
     this.y += this.vy;
-
   }
 }

@@ -4,8 +4,9 @@ class Background {
         this.width = game.width;
         this.context = game.context;
         this.image = new Image();
-        this.image.src = "./images/background.jpg";
+        this.image.src = "./images/snow.jpg";
         this.x = 0;
+        this.velocityX= -2
     }
     draw () {
         this.context.drawImage(this.image, this.x, 0, this.width, this.height);
