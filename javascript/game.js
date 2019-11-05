@@ -16,6 +16,7 @@ class Game {
         this.presentsTimer = 0;
         this.obstacles = [new Obstacles(this)];
         this.obstaclesTimer =0
+        this.borderDistance = 20;
         this.speed = 3000;
     }
     start() {
@@ -31,9 +32,9 @@ class Game {
         for (let i = 0; i < this.presents.length; i++) {
             this.presents[i].draw();
         }
-        // for (let i = 0; i < this.obstacles.length; i++) {
-        //     this.obstacles[i].draw();
-        // }
+        for (let i = 0; i < this.obstacles.length; i++) {
+            this.obstacles[i].draw();
+        }
     }
 
 
@@ -50,23 +51,23 @@ class Game {
     updateEverything(timestamp) {
         this.background.update();
         this.player.update();
-
-        //updating presents
+        
+        // at every 3 seconds (value defined in the constructor) we push a new present object into an array
         if(this.presentsTimer < timestamp - this.speed) {
             this.presents.push(new Presents(this))
             this.presentsTimer = timestamp
         }
         
-        // at every 3 seconds (value defined in the constructor) we push a new present object into an array
+        //updating presents
         for (let i=0; i < this.presents.length; i++) {
             this.presents[i].update();
-        }
-
-        for (let i = this.presents.length - 5; i >= 0; i--) {
-            // console.log(this.player)
-            // console.log(this.presents[i])
+            
             if (this.checkCollision(this.player, this.presents[i])) {
                 this.player.score++;
+                this.presents.splice(i, 1);
+            }
+
+            if (this.presents[i].x + this.presents[i].height < 0) {
                 this.presents.splice(i, 1);
             }
         }
@@ -79,13 +80,16 @@ class Game {
 
         for (let i=0; i < this.obstacles.length; i++) {
             this.obstacles[i].update();
-        }
+            
+            if (this.checkCollision(this.player, this.obstacles[i])) {
+                this.player.score--;
+                this.obstacles.splice(i, 1);
+            }
 
-        // for (let i = this.obstacles.length -5; i >= 0; i--) {
-        //     if (this.checkCollision(this.player, this.obstacles)) {
-        //         this.player.score--;
-        //     }
-        // }
+            if (this.obstacles[i].x + this.obstacles[i].height < 0) {
+                this.obstacles.splice(i, 1);
+            }
+        }
     }
 
 
@@ -93,9 +97,11 @@ class Game {
         // console.log("PLAYER INFO",player.x, player.y, player.width, player.height)
         // console.log("OBJECT INFO",object.x, object.y, object.width, object.height)
 
-        if (player.x === object || player.update() === object || player.x < object.x + object.width || player.x + player.width > object.x ||player.y < object.y + object.height || player.y + player.height > object.y) {
-           return true
-        };
+        if (object.y + object.height >= player.y && object.y <= player.y + player.height
+            && object.x + object.width >= player.x && object.x <= player.x + player.width) {
+            return true;
+        }
+        return false;
     }
 
     clearAll() {

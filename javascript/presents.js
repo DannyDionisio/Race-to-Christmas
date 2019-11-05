@@ -10,8 +10,8 @@ class Presents {
         this.height = 50;
 
         //square position        
-        this.x = this.width + 1000;
-        this.y = (game.height / 2) - (this.height / 2);
+        this.x = this.game.width;
+        this.y = this.randomY();
 
         // Velocity x
         this.vx = -4; 
@@ -29,6 +29,22 @@ class Presents {
 
     update() {
         this.x += this.vx;
+    }
+
+    randomY() {
+        let y = Math.random() * this.game.height
+        const minY = this.game.borderDistance;
+        const maxY = this.game.height - this.height - this.game.borderDistance
+
+        if (y < minY) {
+            y = minY;
+        }
+
+        if (y > maxY) {
+            y = maxY;
+        }
+
+        return y;
     }
 }
 
