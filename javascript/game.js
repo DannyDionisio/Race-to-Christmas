@@ -10,6 +10,7 @@ class Game {
 
         this.player = new Player(this);
         this.background = new Background(this);
+        this.scoreBoard = new Scoreboard(this);
         this.controls = new Controls(this);
         this.controls.setControls();
         this.presents = [];
@@ -20,6 +21,8 @@ class Game {
         this.speed = 3000;
     }
     start() {
+        this.hightScore = 0;
+        this.score = 0;
         this.animation();
     }
 
@@ -27,6 +30,7 @@ class Game {
         this.clearAll();
         this.background.draw();
         this.player.draw();
+        this.scoreBoard.draw();
 
         //draw all presents
         for (let i = 0; i < this.presents.length; i++) {
@@ -51,25 +55,12 @@ class Game {
     updateEverything(timestamp) {
         this.background.update();
         this.player.update();
+        this.updatePresents();
         
         // at every 3 seconds (value defined in the constructor) we push a new present object into an array
         if(this.presentsTimer < timestamp - this.speed) {
             this.presents.push(new Presents(this))
             this.presentsTimer = timestamp
-        }
-        
-        //updating presents
-        for (let i=0; i < this.presents.length; i++) {
-            this.presents[i].update();
-            
-            if (this.checkCollision(this.player, this.presents[i])) {
-                this.player.score++;
-                this.presents.splice(i, 1);
-            }
-
-            if (this.presents[i].x + this.presents[i].height < 0) {
-                this.presents.splice(i, 1);
-            }
         }
 
         //updating obstacles
@@ -78,20 +69,56 @@ class Game {
             this.obstaclesTimer = timestamp
         }
 
+
         for (let i=0; i < this.obstacles.length; i++) {
             this.obstacles[i].update();
             
+            if (this.player.score < 0 && !this.start.score) {
+                this.gameOver();
+            }
+
             if (this.checkCollision(this.player, this.obstacles[i])) {
-                this.player.score--;
+                this.player.score-=10;
                 this.obstacles.splice(i, 1);
             }
 
             if (this.obstacles[i].x + this.obstacles[i].height < 0) {
                 this.obstacles.splice(i, 1);
+            }  
+        }
+    }
+
+    updatePresents() {
+        for (let i=0; i < this.presents.length; i++) {
+            this.presents[i].update();
+            
+            if (this.checkCollision(this.player, this.presents[i])) {
+                this.player.score+=10;
+                this.presents.splice(i, 1);
+            }
+
+            if (this.presents[i].x + this.presents[i].height < 0) {
+                this.presents.splice(i, 1);
             }
         }
     }
 
+    gameOver() {
+        clearInterval(this.intervalId);
+        
+        this.context.fillStyle = "black";
+        this.context.font = "40px Comic Sans MS";
+        this.context.textAlign = "center";
+        this.context.fillText("GAME OVER!", this.context.canvas.width / 2, this.context.canvas.height / 2);
+        
+        this.context.beginPath();
+        this.context.fillStyle = "green";
+        this.context.fillRect((this.width / 2 - 90), (this.height / 2 + 20), 180 , 50);
+        this.context.fillStyle = "black";
+        this.context.font = "20px Comic Sans MS";
+        this.context.fillText("RETRY", (this.width / 2), (this.height / 2 + 50), );
+        this.context.closePath();
+    }
 
     checkCollision(player, object) {
         // console.log("PLAYER INFO",player.x, player.y, player.width, player.height)
@@ -104,10 +131,9 @@ class Game {
         return false;
     }
 
+
+
     clearAll() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }
-
-
-

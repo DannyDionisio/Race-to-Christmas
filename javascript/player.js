@@ -3,6 +3,10 @@ class Player {
     this.game = game;
     this.context = game.context;
 
+    //Santa Claus
+    this.image = new Image();
+    this.image.src = "./images/santa-claus.png";
+
     //square
     this.height = 50;
     this.width = 50;
@@ -17,14 +21,12 @@ class Player {
   }
 
   draw () {
+    this.context.save();
     this.context.fillStyle = 'red';
-    this.context.fillRect(this.x, this.y, this.width, this.height);
+    this.context.drawImage(this.image,this.x,this.y,this.width,this.height);
   }
 
   update () {
-  //  if (this.y <= 0 || this.y >= this.game.height) {
-  //    return;
-  //  }
     this.y += this.vy;
   }
 }

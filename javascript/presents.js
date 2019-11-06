@@ -17,7 +17,7 @@ class Presents {
         this.vx = -4; 
         this.vy = 0;
 
-//        let randomNumber = 1 + Math.floor(150 * Math.random());
+
         this.img = new Image();
         this.img.src = "./images/gift.png";
     }
@@ -30,6 +30,8 @@ class Presents {
     update() {
         this.x += this.vx;
     }
+
+    
 
     randomY() {
         let y = Math.random() * this.game.height
