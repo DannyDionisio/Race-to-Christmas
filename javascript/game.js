@@ -22,8 +22,10 @@ class Game {
     }
     start() {
         this.hightScore = 0;
-        this.score = 0;
+        this.player.score = 0;
+        this.isGameOver = false;
         this.animation();
+        document.querySelector(".start-button").style.display = "none";
     }
 
     drawEverything() {
@@ -46,16 +48,24 @@ class Game {
     // console.log(timestamp);
         this.drawEverything();
         this.updateEverything(timestamp);
+
+        if (this.isGameOver) {
+            return;
+        }
         
     // requestAnimationFrame will generate a timestamp that we will use it as a reference
     // for doing other things, and call the animation() again
-     window.requestAnimationFrame((timestamp) => this.animation(timestamp));
+     this.requestId = window.requestAnimationFrame((timestamp) => this.animation(timestamp));
     }
 
     updateEverything(timestamp) {
         this.background.update();
         this.player.update();
         this.updatePresents();
+            
+        if (this.player.score < 0 && !this.start.score) {
+            this.gameOver();
+        }
         
         // at every 3 seconds (value defined in the constructor) we push a new present object into an array
         if(this.presentsTimer < timestamp - this.speed) {
@@ -72,14 +82,10 @@ class Game {
 
         for (let i=0; i < this.obstacles.length; i++) {
             this.obstacles[i].update();
-            
-            if (this.player.score < 0 && !this.start.score) {
-                this.gameOver();
-            }
 
             if (this.checkCollision(this.player, this.obstacles[i])) {
-                this.player.score-=10;
                 this.obstacles.splice(i, 1);
+                this.gameOver();
             }
 
             if (this.obstacles[i].x + this.obstacles[i].height < 0) {
@@ -104,20 +110,16 @@ class Game {
     }
 
     gameOver() {
-        clearInterval(this.intervalId);
-        
+        this.isGameOver = true;
+        window.cancelAnimationFrame(this.requestId);
+        document.querySelector(".start-button").style.display = "inline";
+        document.querySelector(".start-button").innerHTML = "RETRY";
+
         this.context.fillStyle = "black";
         this.context.font = "40px Comic Sans MS";
         this.context.textAlign = "center";
         this.context.fillText("GAME OVER!", this.context.canvas.width / 2, this.context.canvas.height / 2);
         
-        this.context.beginPath();
-        this.context.fillStyle = "green";
-        this.context.fillRect((this.width / 2 - 90), (this.height / 2 + 20), 180 , 50);
-        this.context.fillStyle = "black";
-        this.context.font = "20px Comic Sans MS";
-        this.context.fillText("RETRY", (this.width / 2), (this.height / 2 + 50), );
-        this.context.closePath();
     }
 
     checkCollision(player, object) {
