@@ -8,8 +8,8 @@ class Player {
     this.image.src = "./images/santa-claus.png";
 
     //square
-    this.height = 50;
-    this.width = 50;
+    this.height = 150;
+    this.width = 150;
 
     //square position
     this.x = 50;

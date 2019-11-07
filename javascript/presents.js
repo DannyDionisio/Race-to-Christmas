@@ -6,8 +6,8 @@ class Presents {
         this.context = game.context;
 
         //square
-        this.width = 50;
-        this.height = 50;
+        this.width = 100;
+        this.height = 100;
 
         //square position        
         this.x = this.game.width;

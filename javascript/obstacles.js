@@ -6,8 +6,8 @@ class Obstacles {
         this.boardHeight = game.boardHeight;
 
         //square
-        this.width = 50;
-        this.height = 50;
+        this.width = 150;
+        this.height = 150;
 
         //square position
         this.x = this.width + 1200;
@@ -15,7 +15,7 @@ class Obstacles {
         //let randomNumber = 1 + Math.floor(150 * Math.random());
 
         //velocity
-        this.vx = -4;
+        this.vx = -5;
         this.vy = 0;
 
         this.img = new Image();

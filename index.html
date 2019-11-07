@@ -3,14 +3,32 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
         <link rel="stylesheet" href="style.css">
         <title>Race for Christmas</title>
     </head>
     <body>
-        <div class="game-screen">
-            <h1>Race for Christmas</h1>
-            <canvas width="1000" height="600"></canvas>  
-            <button class="start-button">Start the Race!</button>
+        <audio src="xmas-.mp3" id="audio1" autoplay loop></audio>
+        <div id="control">
+            <input type="button" id="btnPause" onclick="PausePlay()" style="padding:20px;" value="Pause" />
+        </div>
+        <div class="container">
+            <section class="game-screen">
+                <h1 class="w3-tangerine">Race for Christmas</h1>
+                <canvas width="1000" height="600"></canvas>
+                <div class="instructions">
+                    <p>Oh no! The Santa Claus drop out all the presents by the snowy forest. <br> Help him to find all presents again! <br></p>
+                    <h2>Tips:</h2>
+                    <ul>
+                        <li><img src="./images/gift.png" alt="present" width="50" height="50"/>Catch the presents.</li>
+                        <li><img src="./images/obstacle2.png" alt="obstacle" width="50" height="50"/>Run away from obstacles.</li>
+                    </ul>
+                    <p>And... do your best!</p>
+                </div>
+                <button class="btn btn-danger btn-lg start-button">Start the Race!</button>
+            </section>
         </div>
         <script src="javascript/player.js"></script>
         <script src="javascript/controls.js"></script>

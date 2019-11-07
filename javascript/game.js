@@ -2,6 +2,9 @@ class Game {
     /**
      * @param {HTMLCanvasElement} $canvas
      */
+
+    
+
     constructor($canvas) {
         this.canvas = $canvas;
         this.context = $canvas.getContext('2d');
@@ -19,6 +22,8 @@ class Game {
         this.obstaclesTimer =0
         this.borderDistance = 20;
         this.speed = 3000;
+        this.laugh = new Audio('./santa-laugh.mp3');
+        this.sadGameOver = new Audio('./sadgameover.mp3');
     }
     start() {
         this.hightScore = 0;
@@ -26,6 +31,7 @@ class Game {
         this.isGameOver = false;
         this.animation();
         document.querySelector(".start-button").style.display = "none";
+//        document.querySelector(".instructions").style.display = "compact";
     }
 
     drawEverything() {
@@ -101,7 +107,9 @@ class Game {
             if (this.checkCollision(this.player, this.presents[i])) {
                 this.player.score+=10;
                 this.presents.splice(i, 1);
+                this.laugh.play();
             }
+            
 
             if (this.presents[i].x + this.presents[i].height < 0) {
                 this.presents.splice(i, 1);
@@ -110,22 +118,23 @@ class Game {
     }
 
     gameOver() {
-        this.isGameOver = true;
-        window.cancelAnimationFrame(this.requestId);
-        document.querySelector(".start-button").style.display = "inline";
-        document.querySelector(".start-button").innerHTML = "RETRY";
-
         this.context.fillStyle = "black";
         this.context.font = "40px Comic Sans MS";
         this.context.textAlign = "center";
         this.context.fillText("GAME OVER!", this.context.canvas.width / 2, this.context.canvas.height / 2);
-        
+        this.sadGameOver.play();
+
+        this.santaGameOver = new Image();
+        this.santaGameOver.src = "./images/santa-game.png";
+    //    this.context.drawImage(this.santaGameOver,this.player.x,this.player.y,this.player.width,this.height);
+
+        this.isGameOver = true;
+        window.cancelAnimationFrame(this.requestId);
+        document.querySelector(".start-button").style.display = "inline";
+        document.querySelector(".start-button").innerHTML = "RETRY";
     }
 
     checkCollision(player, object) {
-        // console.log("PLAYER INFO",player.x, player.y, player.width, player.height)
-        // console.log("OBJECT INFO",object.x, object.y, object.width, object.height)
-
         if (object.y + object.height >= player.y && object.y <= player.y + player.height
             && object.x + object.width >= player.x && object.x <= player.x + player.width) {
             return true;
@@ -133,9 +142,9 @@ class Game {
         return false;
     }
 
-
-
     clearAll() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }
+
+

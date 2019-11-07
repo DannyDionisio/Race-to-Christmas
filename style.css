@@ -1,21 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.w3-tangerine {
+    font-family: "Tangerine", serif;
+  }
+
 body {
     background-image: url(./images/maxresdefault.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
 }
 
+#control{
+    position:fixed;
+    top: 2%;
+    right: 2%;
+}
+
+.container {
+}
+
 canvas {
     background-color: #FFF5;
 }
 
+.instructions {
+    position: absolute;
+}
 
 .game-screen {
     position: relative;
     display: inline-block;
 }
 
+.game-screen h1 {
+    text-align: center;
+    font-size: 100px;
+    color: orangered;
+}
+
 .start-button {
     position: absolute;
     top: calc(50% - 20px);
     left: calc(50% - 40px);
+    padding: 10px;
+}
+
+/*.instructions-button {
+    position: absolute;
+    top: calc(50% + 20px);
+    left: calc(50% - 40px);
+    padding: 10px;
 }
