@@ -17,8 +17,8 @@ class Game {
         this.controls = new Controls(this);
         this.controls.setControls();
         this.presents = [];
+        this.obstacles = [];
         this.presentsTimer = 0;
-        this.obstacles = [new Obstacles(this)];
         this.obstaclesTimer =0
         this.borderDistance = 20;
         this.speed = 3000;
@@ -26,12 +26,17 @@ class Game {
         this.sadGameOver = new Audio('./sadgameover.mp3');
     }
     start() {
-        this.hightScore = 0;
+        if (this.requestId) {
+            window.cancelAnimationFrame(this.requestId);
+        }
+
         this.player.score = 0;
         this.isGameOver = false;
+        this.presents = [];
+        this.obstacles = [];
         this.animation();
         document.querySelector(".start-button").style.display = "none";
-//        document.querySelector(".instructions").style.display = "compact";
+        document.querySelector(".instructions").style.display = "none";
     }
 
     drawEverything() {
@@ -92,9 +97,8 @@ class Game {
             if (this.checkCollision(this.player, this.obstacles[i])) {
                 this.obstacles.splice(i, 1);
                 this.gameOver();
-            }
 
-            if (this.obstacles[i].x + this.obstacles[i].height < 0) {
+            } else if (this.obstacles[i].x + this.obstacles[i].height < 0) {
                 this.obstacles.splice(i, 1);
             }  
         }
@@ -135,8 +139,8 @@ class Game {
     }
 
     checkCollision(player, object) {
-        if (object.y + object.height >= player.y && object.y <= player.y + player.height
-            && object.x + object.width >= player.x && object.x <= player.x + player.width) {
+        if (object.y + object.height >= player.y && object.y + object.height / 4 <= player.y + player.height
+            && object.x + object.width >= player.x && object.x + object.height / 4 <= player.x + player.width) {
             return true;
         }
         return false;

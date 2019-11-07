@@ -5,7 +5,10 @@
 
 .w3-tangerine {
     font-family: "Tangerine", serif;
-  }
+    text-align: center;
+    font-size: 100px;
+    color: orangered;
+}
 
 body {
     background-image: url(./images/maxresdefault.jpg);
@@ -19,15 +22,13 @@ body {
     right: 2%;
 }
 
-.container {
-}
-
 canvas {
     background-color: #FFF5;
 }
 
 .instructions {
     position: absolute;
+    top: 0;
 }
 
 .game-screen {
@@ -35,22 +36,9 @@ canvas {
     display: inline-block;
 }
 
-.game-screen h1 {
-    text-align: center;
-    font-size: 100px;
-    color: orangered;
-}
-
 .start-button {
     position: absolute;
     top: calc(50% - 20px);
-    left: calc(50% - 40px);
-    padding: 10px;
-}
-
-/*.instructions-button {
-    position: absolute;
-    top: calc(50% + 20px);
     left: calc(50% - 40px);
     padding: 10px;
 }

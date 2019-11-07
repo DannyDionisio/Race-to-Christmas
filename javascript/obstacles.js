@@ -10,7 +10,7 @@ class Obstacles {
         this.height = 150;
 
         //square position
-        this.x = this.width + 1200;
+        this.x = this.game.width;
         this.y = this.randomY();
         //let randomNumber = 1 + Math.floor(150 * Math.random());
 

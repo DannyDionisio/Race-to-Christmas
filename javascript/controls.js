@@ -26,6 +26,9 @@ class Controls {
                 case 40:
                     this.game.player.vy = 0;
                     break;
+                case 13:
+                    this.game.start();
+                    break;
             }
         })
     }
