@@ -1,5 +1,5 @@
 class Player {
-  constructor (game) {
+  constructor(game) {
     this.game = game;
     this.context = game.context;
 
@@ -13,20 +13,23 @@ class Player {
 
     //square position
     this.x = 50;
-    this.y = (game.height / 2) - (this.height / 2);
+    this.y = game.height / 2 - this.height / 2;
 
     this.vx = 0;
     this.vy = 0;
     this.score = 0;
   }
 
-  draw () {
-    this.context.save();
-    this.context.fillStyle = 'red';
-    this.context.drawImage(this.image,this.x,this.y,this.width,this.height);
+  draw() {
+    // this.context.save();
+
+    // this.context.fillStyle = "red";
+    this.context.drawImage(this.image, this.x, this.y, this.width, this.height);
+
+    // this.context.restore();
   }
 
-  update () {
+  update() {
     this.y += this.vy;
   }
 }

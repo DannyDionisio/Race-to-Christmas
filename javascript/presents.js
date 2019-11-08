@@ -1,54 +1,49 @@
 class Presents {
-    constructor(game) {
-//        this.height = game.height;
-//        this.width = game.width;
-        this.game = game;
-        this.context = game.context;
+  constructor(game) {
+    //        this.height = game.height;
+    //        this.width = game.width;
+    this.game = game;
+    this.context = game.context;
 
-        //square
-        this.width = 100;
-        this.height = 100;
+    //square
+    this.width = 100;
+    this.height = 100;
 
-        //square position        
-        this.x = this.game.width;
-        this.y = this.randomY();
+    //square position
+    this.x = this.game.width;
+    this.y = this.randomY();
 
-        // Velocity x
-        this.vx = -4; 
-        this.vy = 0;
+    // Velocity x
+    // this.vx = -4;
+    this.vy = 0;
 
+    this.img = new Image();
+    this.img.src = "./images/gift.png";
+  }
+  draw() {
+    this.context.save();
+    this.context.fillStyle = "green";
+    this.context.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
 
-        this.img = new Image();
-        this.img.src = "./images/gift.png";
+  update() {
+    const velocity = this.game.speed * -1;
+    this.x += velocity;
+  }
+
+  randomY() {
+    let y = Math.random() * this.game.height;
+    const minY = this.game.borderDistance;
+    const maxY = this.game.height - this.height - this.game.borderDistance;
+
+    if (y < minY) {
+      y = minY;
     }
-    draw() {
-        this.context.save();
-        this.context.fillStyle = "green";
-        this.context.drawImage(this.img, this.x, this.y, this.width, this.height);
+
+    if (y > maxY) {
+      y = maxY;
     }
 
-    update() {
-        this.x += this.vx;
-    }
-
-    
-
-    randomY() {
-        let y = Math.random() * this.game.height
-        const minY = this.game.borderDistance;
-        const maxY = this.game.height - this.height - this.game.borderDistance
-
-        if (y < minY) {
-            y = minY;
-        }
-
-        if (y > maxY) {
-            y = maxY;
-        }
-
-        return y;
-    }
+    return y;
+  }
 }
-
-
-
