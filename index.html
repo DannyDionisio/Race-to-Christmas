@@ -18,7 +18,7 @@
     <title>Race for Christmas</title>
   </head>
   <body>
-    <audio src="xmas-song.mp3" id="audio1" autoplay loop></audio>
+    <audio src="./sounds/xmas-song.mp3" id="audio1" autoplay loop></audio>
     <div id="control">
       <input
         type="button"
@@ -33,36 +33,38 @@
       <h1 class="w3-tangerine">Race for Christmas</h1>
       <section class="game-screen">
         <canvas width="1000" height="600"></canvas>
-        <div class="instructions">
-          <p>
-            Oh no! The Santa Claus drop out all the presents by the snowy
-            forest. <br />
-            Help him to find all presents again! <br />
-          </p>
-          <h2>Tips:</h2>
-          <ul>
-            <li>Use ENTER key to Start or Retry the game again.</li>
-            <li>Use the arrows up and down keys to move the Santa Claus.</li>
-            <li>
-              <img
-                src="./images/gift.png"
-                alt="present"
-                width="50"
-                height="50"
-              />Catch the presents.
-            </li>
-            <li>
-              <img
-                src="./images/obstacle2.png"
-                alt="obstacle"
-                width="50"
-                height="50"
-              />Run away from obstacles.
-            </li>
-          </ul>
-          <p>And... do your best!</p>
+        <div class="container-into">
+            <div class="instructions">
+              <p>
+                Oh no! The Santa Claus drop out all the presents by the snowy
+                forest. <br />
+                Help him to cath all presents again! <br />
+              </p>
+              <h2>Tips:</h2>
+              <ul>
+                <li>Use ENTER key to Start or Retry the game again.</li>
+                <li>Use Up and Down keys to move the Santa Claus.</li>
+                <li>
+                  <img
+                    src="./images/gift.png"
+                    alt="present"
+                    width="50"
+                    height="50"
+                  />Catch the presents.
+                </li>
+                <li>
+                  <img
+                    src="./images/obstacle2.png"
+                    alt="obstacle"
+                    width="50"
+                    height="50"
+                  />Run away from obstacles.
+                </li>
+              </ul>
+              <p>And... do your best!</p>
+            </div>
+            <button class="btn btn-danger btn-lg start-button">Start Race!</button>
         </div>
-        <button class="btn btn-danger btn-lg start-button">Start Race!</button>
       </section>
     </div>
     <script src="javascript/player.js"></script>

@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .w3-tangerine {
@@ -8,6 +9,7 @@
   text-align: center;
   font-size: 100px;
   color: orangered;
+  padding: 40px 0;
 }
 
 html,
@@ -30,16 +32,28 @@ body {
 }
 
 canvas {
-  background-color: #fff5;
+  background-color: #fff9;
+}
+
+.container-into {
+  display: flex;
+  flex-direction: column;
 }
 
 .instructions {
   position: absolute;
-  top: 0;
-  padding: 20px;
+  top: 30px;
+  padding: 63px 54px;
+  line-height: 45px;
+  font-size: 20px;
 }
 
-.instructions ul {
+.instructions img {
+  margin: 10px;
+}
+
+.instructions li {
+    margin-left: 30px;
 }
 
 .game-screen {
@@ -49,7 +63,7 @@ canvas {
 
 .start-button {
   position: absolute;
-  top: calc(50% - 20px);
-  left: calc(50% - 40px);
+  top: calc(50%);
+  left: calc(50% + 240px);
   padding: 10px;
 }

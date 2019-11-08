@@ -26,8 +26,8 @@ class Game {
     this.obstaclesTimer = 0;
     this.borderDistance = 20;
     this.speed = 1.5;
-    this.laugh = new Audio("./santa-laugh.mp3");
-    this.sadGameOver = new Audio("./sadgameover.mp3");
+    this.laugh = new Audio("./sounds/santa-laugh.mp3");
+    this.sadGameOver = new Audio("./sounds/sadgameover.mp3");
   }
 
   start() {
@@ -130,25 +130,21 @@ class Game {
   }
 
   gameOver() {
-    this.context.fillStyle = "black";
-    this.context.font = "40px Comic Sans MS";
-    this.context.textAlign = "center";
-    this.context.fillText(
-      "GAME OVER!",
-      this.context.canvas.width / 2,
-      this.context.canvas.height / 2
-    );
-
     this.context.fillStyle = "white";
     this.context.fillRect(0, 0, 1000, 600);
+
+    this.context.fillStyle = "black";
+    this.context.font = "60px Comic Sans MS";
+    this.context.textAlign = "center";
+    this.context.fillText("GAME OVER!", this.width / 2, this.height / 3);
 
     this.santaGameOver = santaGameOver;
     this.context.drawImage(
       this.santaGameOver,
-      30,
-      30,
-      this.width - 30,
-      this.height - 30
+      this.width / 4,
+      this.height / 2,
+      this.width / 2,
+      this.height / 2
     );
 
     this.sadGameOver.play();

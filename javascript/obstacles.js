@@ -20,7 +20,7 @@ class Obstacles {
 
     this.img = new Image();
     this.img.src =
-      "./images/obstacle" + (Math.floor(Math.random() * 4) + 1) + ".png";
+      "images/obstacle" + (Math.floor(Math.random() * 4) + 1) + ".png";
   }
 
   draw() {
