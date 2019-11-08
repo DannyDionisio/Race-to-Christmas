@@ -34,36 +34,38 @@
       <section class="game-screen">
         <canvas width="1000" height="600"></canvas>
         <div class="container-into">
-            <div class="instructions">
-              <p>
-                Oh no! The Santa Claus drop out all the presents by the snowy
-                forest. <br />
-                Help him to cath all presents again! <br />
-              </p>
-              <h2>Tips:</h2>
-              <ul>
-                <li>Use ENTER key to Start or Retry the game again.</li>
-                <li>Use Up and Down keys to move the Santa Claus.</li>
-                <li>
-                  <img
-                    src="./images/gift.png"
-                    alt="present"
-                    width="50"
-                    height="50"
-                  />Catch the presents.
-                </li>
-                <li>
-                  <img
-                    src="./images/obstacle2.png"
-                    alt="obstacle"
-                    width="50"
-                    height="50"
-                  />Run away from obstacles.
-                </li>
-              </ul>
-              <p>And... do your best!</p>
-            </div>
-            <button class="btn btn-danger btn-lg start-button">Start Race!</button>
+          <div class="instructions">
+            <p>
+              Oh no! The Santa Claus drop out all the presents by the snowy
+              forest. <br />
+              Help him to cath all presents again! <br />
+            </p>
+            <h2>Tips:</h2>
+            <ul>
+              <li>Use ENTER key to Start or Retry the game again.</li>
+              <li>Use Up and Down keys to move the Santa Claus.</li>
+              <li>
+                <img
+                  src="./images/gift.png"
+                  alt="present"
+                  width="50"
+                  height="50"
+                />Catch the presents.
+              </li>
+              <li>
+                <img
+                  src="./images/obstacle2.png"
+                  alt="obstacle"
+                  width="50"
+                  height="50"
+                />Run away from obstacles.
+              </li>
+            </ul>
+            <p>And... do your best!</p>
+          </div>
+          <button class="btn btn-danger btn-lg start-button">
+            Start Race!
+          </button>
         </div>
       </section>
     </div>
@@ -76,5 +78,23 @@
     <script src="javascript/scoreboard.js"></script>
     <script src="javascript/game.js"></script>
     <script src="javascript/main.js"></script>
+    <script>
+      var audio = document.getElementById("audio1");
+      var btn = document.getElementById("btnPause");
+
+      function PausePlay() {
+        if (audio.paused) {
+          audio.play();
+          btn.value = "Pause";
+        } else if (audio.ended) {
+          audio.currentTime = 0;
+          audio.play();
+          btn.value = "Pause";
+        } else {
+          audio.pause();
+          btn.value = "Play";
+        }
+      }
+    </script>
   </body>
 </html>
